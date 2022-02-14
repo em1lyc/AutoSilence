@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AutoSilenceUI</string>
+    <string name="autosilence">AutoSilence.</string>
+    <string name="your_device">Your device is currently silenced</string>
+    <string name="silence">SILENCE</string>
+</resources>
