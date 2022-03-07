@@ -39,4 +39,8 @@
         </item>
 
     </style>
+
+    <style name="AppTheme" parent="android:Theme.Material">
+        <item name="colorPrimary">#676866</item>
+    </style>
 </resources>
