@@ -5,6 +5,7 @@ import static android.app.Service.START_STICKY;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.app.NotificationManager;
@@ -68,10 +69,12 @@ public class MainActivity extends AppCompatActivity {
         silenceButton = findViewById(R.id.silence);
         locationButton = findViewById(R.id.locations);
         locationButton.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 setContentView(R.layout.activity_locations);
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment, new MyFragment());
+                ft.commit();
             }
         });
         textView = findViewById(R.id.your_device);

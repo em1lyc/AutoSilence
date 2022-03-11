@@ -28,6 +28,44 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/back"
+        app:layout_constraintEnd_toStartOf="@+id/back"
+        app:layout_constraintStart_toStartOf="@id/fragment"
+        app:layout_constraintTop_toTopOf="@+id/back" />
 
+    <TextView
+        android:id="@+id/back"
+        android:layout_width="47dp"
+        android:layout_height="38dp"
+        android:fontFamily="@font/fjalla_one"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="BACK"
+        android:textAppearance="@style/silence"
+        app:layout_constraintTop_toBottomOf="@+id/locationsTitle" />
+
+    <TextView
+        android:id="@+id/locationsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fira_sans_black"
+        android:gravity="center_horizontal|top"
+        android:text="Locations"
+        android:textAppearance="@style/autosilence"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vector_1" />
+
+
+    <fragment
+        android:name="com.example.autosilenceui.MyFragment"
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/back"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
