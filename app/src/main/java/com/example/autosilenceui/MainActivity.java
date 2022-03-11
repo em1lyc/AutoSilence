@@ -33,6 +33,9 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,6 +46,7 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
 
     private TextView silenceButton;
+    private TextView locationButton;
     private TextView textView;
     private AudioManager audioManager;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -52,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
     private Scanner scanner;
     private double lat;
     private double lon;
+    private double radius;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +66,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         silenceButton = findViewById(R.id.silence);
+        locationButton = findViewById(R.id.locations);
+        locationButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.activity_locations);
+            }
+        });
         textView = findViewById(R.id.your_device);
+
         try {
-            scanner = new Scanner(new File(context.getFilesDir().getAbsolutePath() + "/theaters.csv"));
-            Log.d("test", "" + scanner.next());
+            Scanner scanner = new Scanner(new File("theaters.csv"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            Log.d("error", "didn't work");
         }
 
         updateText();
@@ -124,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                         lon = location.getLongitude();
                         Log.d("latitude", "" + lat);
                         Log.d("longitude", "" + lon);
-                        if(location.getLatitude() > 37 && location.getLongitude() < 38 && location.getLongitude() < -122 && location.getLongitude() > -123){
+                        if(Math.abs(lat - 37.8199) <= 0.0001 && Math.abs(lon - (-122.4783)) <= 0.0001){
                                 audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
                                 updateText();
                         }
@@ -133,6 +148,18 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         mFusedLocationClient.requestLocationUpdates(mLocationRequest, locationCallback, Looper.getMainLooper());
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("id").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                }
+            }
+        });
     }
     void updateText() {
         if(audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
