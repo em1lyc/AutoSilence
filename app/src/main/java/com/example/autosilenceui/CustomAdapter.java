@@ -1,12 +1,17 @@
 package com.example.autosilenceui;
 
+import static androidx.core.content.res.ResourcesCompat.getFont;
+
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.core.content.res.ResourcesCompat;
 
 public class CustomAdapter extends BaseAdapter {
 
@@ -44,7 +49,9 @@ public class CustomAdapter extends BaseAdapter {
         TextView addresses = (TextView) view.findViewById(R.id.subtitle);
         ImageView background = (ImageView) view.findViewById(R.id.imageView2);
         names.setText(namesList[i]);
+        names.setTypeface(ResourcesCompat.getFont(context, R.font.fjalla_one));
         addresses.setText(addressList[i]);
+        addresses.setTypeface(ResourcesCompat.getFont(context, R.font.fira_sans_thin));
         return view;
     }
 }
