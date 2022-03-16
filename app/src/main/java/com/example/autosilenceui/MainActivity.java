@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +25,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
     private double lon;
     private double radius;
     private DatabaseReference mDatabase;
+    private String[] names = {"Regal Ronkonkoma Stadium 9", "Movieland of Coram", "Sayville Theatre", "AMC Loews Stony Brook 17", "P.J. Cinemas", "Island Cinemas - Mastic", "Regal Deer Park Stadium 16 & IMAX", "Elwood Cinema", "South Bay Cinemas"};
+    private String[] addresses = {"565 Portion Road, Ronkonkoma, NY", "1850 Rt 112,Coram, NY", "103 Railroad Ave.,Sayville, NY", "2196 Nesconset Highway, Stony Brook, NY", "1068 Route 112, Port Jefferson Station, NY", "1708 Montauk Highway, Mastic, NY", "1050 Commack Road, Deer Park, NY", "1950 East Jericho Turnpike, East Northport, NY", "495 W. Montauk Hwy, West Babylon, NY"};
+    private ListView listView;
+    private CustomAdapter customAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +78,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setContentView(R.layout.activity_locations);
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.fragment, new MyFragment());
-                ft.commit();
+                listView = (ListView) findViewById(R.id.listview);
+                customAdapter = new CustomAdapter(getApplicationContext(), names, addresses);
+                listView.setAdapter(customAdapter);
+//                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//                ft.replace(R.id.fragment, new MyFragment());
+//                ft.commit();
             }
         });
         textView = findViewById(R.id.your_device);

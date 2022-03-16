@@ -35,7 +35,8 @@
         android:background="@drawable/back_arrow"
         app:layout_constraintBottom_toBottomOf="@+id/back"
         app:layout_constraintEnd_toStartOf="@+id/back"
-        app:layout_constraintTop_toTopOf="@+id/back" />
+        app:layout_constraintTop_toTopOf="@+id/back"
+        app:layout_constraintStart_toStartOf="@id/listview"/>
 
     <TextView
         android:id="@+id/back"
@@ -45,6 +46,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="BACK"
         android:textAppearance="@style/silence"
+        app:layout_constraintStart_toEndOf="@id/back"
         app:layout_constraintTop_toBottomOf="@+id/locationsTitle" />
 
     <TextView
@@ -60,8 +62,10 @@
         app:layout_constraintTop_toBottomOf="@+id/vector_1" />
 
     <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="268dp"
+        android:layout_height="450dp"
+        android:dividerHeight="13dp"
+        android:id="@+id/listview"
         app:layout_constraintTop_toBottomOf="@id/back"
         app:layout_constraintLeft_toLeftOf="@id/frame_1"
         app:layout_constraintRight_toRightOf="@id/frame_1"/>
