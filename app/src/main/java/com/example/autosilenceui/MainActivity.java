@@ -25,6 +25,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView silenceButton;
     private TextView locationButton;
+    private ImageView backButton;
     private TextView textView;
     private AudioManager audioManager;
     private FusedLocationProviderClient mFusedLocationClient;
@@ -73,19 +75,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         silenceButton = findViewById(R.id.silence);
-        locationButton = findViewById(R.id.locations);
-        locationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setContentView(R.layout.activity_locations);
-                listView = (ListView) findViewById(R.id.listview);
-                customAdapter = new CustomAdapter(getApplicationContext(), names, addresses);
-                listView.setAdapter(customAdapter);
-//                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//                ft.replace(R.id.fragment, new MyFragment());
-//                ft.commit();
-            }
-        });
         textView = findViewById(R.id.your_device);
 
         try {
@@ -184,4 +173,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void setLocationButton(View view) {
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
+        listView = (ListView) findViewById(R.id.listview);
+        customAdapter = new CustomAdapter(getApplicationContext(), names, addresses);
+        listView.setAdapter(customAdapter);
+//                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//                ft.replace(R.id.fragment, new MyFragment());
+//                ft.commit();
+        backButton = findViewById(R.id.imageView5);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), SecondActivity.class);
+                view.getContext().startActivity(intent);
+            }
+        });
+    }
 }
