@@ -2,6 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SecondActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <View
@@ -62,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/vector_1" />
 
     <ListView
-        android:layout_width="268dp"
+        android:layout_width="300dp"
         android:layout_height="450dp"
         android:dividerHeight="13dp"
         android:id="@+id/listview"

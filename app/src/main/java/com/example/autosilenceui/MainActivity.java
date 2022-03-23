@@ -76,7 +76,15 @@ public class MainActivity extends AppCompatActivity {
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         silenceButton = findViewById(R.id.silence);
         textView = findViewById(R.id.your_device);
-
+        locationButton = findViewById(R.id.locations);
+        locationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("test", "success");
+                Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
+                startActivity(intent);
+            }
+        });
         try {
             Scanner scanner = new Scanner(new File("theaters.csv"));
         } catch (FileNotFoundException e) {
@@ -171,24 +179,5 @@ public class MainActivity extends AppCompatActivity {
             silenceButton.setText("UNSILENCE");
             textView.setText("Your device is currently silenced");
         }
-    }
-
-    public void setLocationButton(View view) {
-        Intent intent = new Intent(this, SecondActivity.class);
-        startActivity(intent);
-        listView = (ListView) findViewById(R.id.listview);
-        customAdapter = new CustomAdapter(getApplicationContext(), names, addresses);
-        listView.setAdapter(customAdapter);
-//                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//                ft.replace(R.id.fragment, new MyFragment());
-//                ft.commit();
-        backButton = findViewById(R.id.imageView5);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), SecondActivity.class);
-                view.getContext().startActivity(intent);
-            }
-        });
     }
 }

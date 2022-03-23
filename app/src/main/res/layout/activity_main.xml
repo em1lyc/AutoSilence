@@ -119,7 +119,6 @@
         android:fontFamily="@font/fjalla_one"
         android:gravity="center_horizontal|center_vertical"
         android:text="LOCATIONS"
-        android:onClick="setLocationButton"
         android:layout_marginTop="15dp"
         android:textAppearance="@style/silence"
         app:layout_constraintEnd_toEndOf="parent"
