@@ -13,23 +13,23 @@ import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
 
+import java.util.ArrayList;
+
 public class CustomAdapter extends BaseAdapter {
 
     Context context;
-    String namesList[];
-    String addressList[];
+    ArrayList<Location> locationArrayList;
     LayoutInflater inflater;
 
-    public CustomAdapter(Context applicationContext, String[] names, String[] addresses) {
+    public CustomAdapter(Context applicationContext, ArrayList<Location> list) {
         context = applicationContext;
-        namesList = names;
-        addressList = addresses;
+        locationArrayList = list;
         inflater = (LayoutInflater.from(applicationContext));
     }
 
     @Override
     public int getCount() {
-        return namesList.length;
+        return locationArrayList.size();
     }
 
     @Override
@@ -48,9 +48,9 @@ public class CustomAdapter extends BaseAdapter {
         TextView names = (TextView) view.findViewById(R.id.title);
         TextView addresses = (TextView) view.findViewById(R.id.subtitle);
         ImageView background = (ImageView) view.findViewById(R.id.imageView2);
-        names.setText(namesList[i]);
+        names.setText(locationArrayList.get(i).getName());
         names.setTypeface(ResourcesCompat.getFont(context, R.font.fjalla_one));
-        addresses.setText(addressList[i]);
+        addresses.setText(locationArrayList.get(i).getLocation());
         addresses.setTypeface(ResourcesCompat.getFont(context, R.font.fira_sans_thin));
         return view;
     }

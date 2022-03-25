@@ -146,8 +146,8 @@ public class MainActivity extends AppCompatActivity {
                     for (Location location : locationResult.getLocations()) {
                         lat = location.getLatitude();
                         lon = location.getLongitude();
-                        Log.d("latitude", "" + lat);
-                        Log.d("longitude", "" + lon);
+//                        Log.d("latitude", "" + lat);
+//                        Log.d("longitude", "" + lon);
                         if(Math.abs(lat - 37.8199) <= 0.0001 && Math.abs(lon - (-122.4783)) <= 0.0001){
                                 audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
                                 updateText();
