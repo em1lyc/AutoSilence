@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,42 +16,42 @@ import androidx.core.content.res.ResourcesCompat;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends BaseAdapter {
+public class LocationsAdapter extends ArrayAdapter<Location> {
 
     Context context;
-    ArrayList<Location> locationArrayList;
-    LayoutInflater inflater;
+    ArrayList<Location> locations;
 
-    public CustomAdapter(Context applicationContext, ArrayList<Location> list) {
+    public LocationsAdapter(Context applicationContext, ArrayList<Location> list) {
+        super(applicationContext, 0, list);
         context = applicationContext;
-        locationArrayList = list;
-        inflater = (LayoutInflater.from(applicationContext));
+        locations = list;
     }
 
     @Override
     public int getCount() {
-        return locationArrayList.size();
+        return locations.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public Location getItem(int position) {
+        return locations.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        view = inflater.inflate(R.layout.list, null);
+    public View getView(int position, View view, ViewGroup viewGroup) {
+        view = LayoutInflater.from(getContext()).inflate(R.layout.list, null);
+        Location location = getItem(position);
         TextView names = (TextView) view.findViewById(R.id.title);
         TextView addresses = (TextView) view.findViewById(R.id.subtitle);
         ImageView background = (ImageView) view.findViewById(R.id.imageView2);
-        names.setText(locationArrayList.get(i).getName());
+        names.setText(location.getName());
         names.setTypeface(ResourcesCompat.getFont(context, R.font.fjalla_one));
-        addresses.setText(locationArrayList.get(i).getLocation());
+        addresses.setText(location.getLocation());
         addresses.setTypeface(ResourcesCompat.getFont(context, R.font.fira_sans_thin));
         return view;
     }

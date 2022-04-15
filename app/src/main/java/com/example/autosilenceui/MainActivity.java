@@ -63,10 +63,8 @@ public class MainActivity extends AppCompatActivity {
     private double lon;
     private double radius;
     private DatabaseReference mDatabase;
-    private String[] names = {"Regal Ronkonkoma Stadium 9", "Movieland of Coram", "Sayville Theatre", "AMC Loews Stony Brook 17", "P.J. Cinemas", "Island Cinemas - Mastic", "Regal Deer Park Stadium 16 & IMAX", "Elwood Cinema", "South Bay Cinemas"};
-    private String[] addresses = {"565 Portion Road, Ronkonkoma, NY", "1850 Rt 112,Coram, NY", "103 Railroad Ave.,Sayville, NY", "2196 Nesconset Highway, Stony Brook, NY", "1068 Route 112, Port Jefferson Station, NY", "1708 Montauk Highway, Mastic, NY", "1050 Commack Road, Deer Park, NY", "1950 East Jericho Turnpike, East Northport, NY", "495 W. Montauk Hwy, West Babylon, NY"};
     private ListView listView;
-    private CustomAdapter customAdapter;
+    private LocationsAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
